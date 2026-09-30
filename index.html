@@ -6,246 +6,736 @@
 <title>Premium Video Downloader</title>
 
 <style>
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+    font-family:Arial,sans-serif;
+    background:#f4f6f8;
+    color:#111827;
+    min-height:100vh;
+    padding-bottom:80px;
 }
 
-body {
-    font-family: Arial, sans-serif;
-    background: #f5f7fa;
-    color: #111827;
-    min-height: 100vh;
+.hidden{display:none!important}
+
+.header{
+    background:#111827;
+    color:white;
+    padding:24px 18px;
+    border-radius:0 0 24px 24px;
 }
 
-.header {
-    background: #ffffff;
-    padding: 22px 18px;
-    text-align: center;
-    border-bottom: 1px solid #e5e7eb;
+.logo{
+    font-size:23px;
+    font-weight:800;
 }
 
-.logo {
-    font-size: 25px;
-    font-weight: 800;
+.subtitle{
+    color:#cbd5e1;
+    font-size:13px;
+    margin-top:6px;
 }
 
-.subtitle {
-    color: #6b7280;
-    margin-top: 6px;
-    font-size: 14px;
+.container{
+    max-width:620px;
+    margin:auto;
+    padding:18px 14px;
 }
 
-.container {
-    max-width: 600px;
-    margin: auto;
-    padding: 20px 15px 40px;
+.card{
+    background:white;
+    border-radius:20px;
+    padding:20px;
+    margin-bottom:16px;
+    box-shadow:0 6px 25px rgba(0,0,0,.06);
 }
 
-.card {
-    background: white;
-    border-radius: 18px;
-    padding: 20px;
-    margin-bottom: 18px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+.card h2{
+    font-size:18px;
+    margin-bottom:15px;
 }
 
-.card h2 {
-    font-size: 19px;
-    margin-bottom: 15px;
+.platforms{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:11px;
 }
 
-.platforms {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
+.platform{
+    background:white;
+    border:1px solid #e5e7eb;
+    border-radius:15px;
+    padding:16px 8px;
+    text-align:center;
+    font-weight:700;
+    cursor:pointer;
 }
 
-.platform {
-    border: 1px solid #e5e7eb;
-    background: #fff;
-    border-radius: 14px;
-    padding: 16px 10px;
-    text-align: center;
-    font-size: 15px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: 0.2s;
+.platform.selected{
+    border:2px solid #111827;
+    background:#f1f5f9;
 }
 
-.platform:active {
-    transform: scale(0.97);
+.icon{
+    display:block;
+    font-size:25px;
+    margin-bottom:6px;
 }
 
-.platform.selected {
-    border: 2px solid #111827;
-    background: #f3f4f6;
+input{
+    width:100%;
+    padding:14px;
+    border:1px solid #d1d5db;
+    border-radius:12px;
+    font-size:15px;
+    outline:none;
+    margin-bottom:12px;
 }
 
-.icon {
-    display: block;
-    font-size: 27px;
-    margin-bottom: 7px;
+input:focus{
+    border-color:#111827;
 }
 
-input {
-    width: 100%;
-    padding: 15px;
-    border: 1px solid #d1d5db;
-    border-radius: 12px;
-    outline: none;
-    font-size: 15px;
-    margin-bottom: 12px;
+button{
+    cursor:pointer;
 }
 
-input:focus {
-    border-color: #111827;
+.primary{
+    width:100%;
+    padding:15px;
+    border:0;
+    border-radius:12px;
+    background:#111827;
+    color:white;
+    font-size:15px;
+    font-weight:700;
 }
 
-.download {
-    width: 100%;
-    padding: 15px;
-    border: none;
-    border-radius: 12px;
-    background: #111827;
-    color: white;
-    font-size: 16px;
-    font-weight: 700;
-    cursor: pointer;
+.google{
+    width:100%;
+    padding:14px;
+    border:1px solid #d1d5db;
+    border-radius:12px;
+    background:white;
+    color:#111827;
+    font-size:15px;
+    font-weight:700;
+    margin-top:10px;
 }
 
-.download:active {
-    transform: scale(0.98);
+.secondary{
+    width:100%;
+    padding:13px;
+    border:1px solid #d1d5db;
+    border-radius:12px;
+    background:white;
+    font-weight:700;
 }
 
-.status {
-    display: none;
-    text-align: center;
-    margin-top: 15px;
-    padding: 12px;
-    border-radius: 10px;
-    background: #f3f4f6;
-    color: #374151;
-    font-size: 14px;
+.status{
+    display:none;
+    margin-top:12px;
+    padding:11px;
+    border-radius:10px;
+    background:#f1f5f9;
+    text-align:center;
+    font-size:13px;
 }
 
-.footer {
-    text-align: center;
-    color: #9ca3af;
-    font-size: 12px;
-    padding: 10px;
+.auth-box{
+    max-width:420px;
+    margin:35px auto;
+    padding:20px;
+}
+
+.auth-title{
+    font-size:25px;
+    font-weight:800;
+    margin-bottom:7px;
+}
+
+.auth-sub{
+    color:#6b7280;
+    font-size:14px;
+    margin-bottom:20px;
+}
+
+.switch{
+    text-align:center;
+    margin-top:15px;
+    font-size:13px;
+    color:#6b7280;
+}
+
+.switch span{
+    color:#111827;
+    font-weight:700;
+    cursor:pointer;
+}
+
+.profile{
+    text-align:center;
+}
+
+.avatar{
+    width:75px;
+    height:75px;
+    border-radius:50%;
+    background:#111827;
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin:0 auto 15px;
+    font-size:28px;
+    font-weight:800;
+}
+
+.email{
+    color:#6b7280;
+    font-size:13px;
+    margin-top:5px;
+    word-break:break-word;
+}
+
+.bottom{
+    position:fixed;
+    bottom:0;
+    left:0;
+    right:0;
+    height:68px;
+    background:white;
+    border-top:1px solid #e5e7eb;
+    display:flex;
+    justify-content:space-around;
+    align-items:center;
+    z-index:20;
+}
+
+.nav{
+    border:0;
+    background:none;
+    color:#6b7280;
+    font-size:12px;
+    font-weight:700;
+    text-align:center;
+}
+
+.nav.active{
+    color:#111827;
+}
+
+.nav-icon{
+    display:block;
+    font-size:22px;
+    margin-bottom:3px;
 }
 </style>
 </head>
 
 <body>
 
-<div class="header">
-    <div class="logo">⚡ Premium Video Downloader</div>
-    <div class="subtitle">Download your favorite videos easily</div>
-</div>
-
-<div class="container">
+<!-- AUTH -->
+<section id="authScreen" class="auth-box">
 
     <div class="card">
-        <h2>Choose Platform</h2>
+        <div class="auth-title" id="authTitle">Welcome Back</div>
+        <div class="auth-sub" id="authSub">
+            Login to Premium Video Downloader
+        </div>
 
-        <div class="platforms">
+        <input id="nameInput"
+               class="hidden"
+               type="text"
+               placeholder="Your name">
 
-            <div class="platform" onclick="selectPlatform(this, 'TikTok')">
-                <span class="icon">🎵</span>
-                TikTok
+        <input id="emailInput"
+               type="email"
+               placeholder="Email address">
+
+        <input id="passwordInput"
+               type="password"
+               placeholder="Password">
+
+        <button class="primary" id="emailButton">
+            Login
+        </button>
+
+        <button class="google" id="googleButton">
+            🔵 Continue with Google
+        </button>
+
+        <div class="switch">
+            <span id="switchText">Don't have an account? Sign Up</span>
+        </div>
+
+        <div class="status" id="authStatus"></div>
+    </div>
+
+</section>
+
+
+<!-- APP -->
+<section id="appScreen" class="hidden">
+
+    <div class="header">
+        <div class="logo">⚡ Premium Video Downloader</div>
+        <div class="subtitle">Fast & simple video downloading</div>
+    </div>
+
+    <div class="container">
+
+        <!-- HOME -->
+        <div id="homePage">
+
+            <div class="card">
+                <h2>Choose Platform</h2>
+
+                <div class="platforms">
+
+                    <div class="platform"
+                         onclick="selectPlatform(this,'TikTok')">
+                        <span class="icon">🎵</span>
+                        TikTok
+                    </div>
+
+                    <div class="platform"
+                         onclick="selectPlatform(this,'Instagram')">
+                        <span class="icon">📸</span>
+                        Instagram
+                    </div>
+
+                    <div class="platform"
+                         onclick="selectPlatform(this,'YouTube Shorts')">
+                        <span class="icon">▶️</span>
+                        YouTube Shorts
+                    </div>
+
+                    <div class="platform"
+                         onclick="selectPlatform(this,'Pinterest')">
+                        <span class="icon">📌</span>
+                        Pinterest
+                    </div>
+
+                    <div class="platform"
+                         onclick="selectPlatform(this,'Facebook')">
+                        <span class="icon">🔵</span>
+                        Facebook
+                    </div>
+
+                    <div class="platform"
+                         onclick="selectPlatform(this,'Snapchat')">
+                        <span class="icon">👻</span>
+                        Snapchat
+                    </div>
+
+                </div>
             </div>
 
-            <div class="platform" onclick="selectPlatform(this, 'Instagram')">
-                <span class="icon">📸</span>
-                Instagram
-            </div>
+            <div class="card">
+                <h2>Video URL</h2>
 
-            <div class="platform" onclick="selectPlatform(this, 'YouTube Shorts')">
-                <span class="icon">▶️</span>
-                YouTube Shorts
-            </div>
+                <input
+                    id="videoUrl"
+                    type="url"
+                    placeholder="Paste video link here..."
+                >
 
-            <div class="platform" onclick="selectPlatform(this, 'Pinterest')">
-                <span class="icon">📌</span>
-                Pinterest
-            </div>
+                <button class="primary" onclick="startDownload()">
+                    ⬇️ Download Video
+                </button>
 
-            <div class="platform" onclick="selectPlatform(this, 'Facebook')">
-                <span class="icon">🔵</span>
-                Facebook
-            </div>
-
-            <div class="platform" onclick="selectPlatform(this, 'Snapchat')">
-                <span class="icon">👻</span>
-                Snapchat
+                <div class="status" id="downloadStatus"></div>
             </div>
 
         </div>
+
+
+        <!-- PROFILE -->
+        <div id="profilePage" class="hidden">
+
+            <div class="card profile">
+
+                <div class="avatar" id="avatar">U</div>
+
+                <h2 id="profileName">User</h2>
+
+                <div class="email" id="profileEmail">
+                    user@example.com
+                </div>
+
+                <br>
+
+                <button class="secondary" onclick="logout()">
+                    Logout
+                </button>
+
+            </div>
+
+        </div>
+
     </div>
 
-    <div class="card">
-        <h2>Video URL</h2>
+</section>
 
-        <input
-            type="url"
-            id="videoUrl"
-            placeholder="Paste video link here..."
-        >
 
-        <button class="download" onclick="startDownload()">
-            ⬇️ Download Video
-        </button>
+<!-- NAVIGATION -->
+<div id="bottomNav" class="bottom hidden">
 
-        <div class="status" id="status"></div>
-    </div>
+    <button class="nav active" onclick="showPage('home',this)">
+        <span class="nav-icon">🏠</span>
+        Home
+    </button>
+
+    <button class="nav" onclick="showPage('profile',this)">
+        <span class="nav-icon">👤</span>
+        Profile
+    </button>
 
 </div>
 
-<div class="footer">
-    Premium Video Downloader
-</div>
 
-<script>
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
+
+import {
+    getAuth,
+    GoogleAuthProvider,
+    signInWithPopup,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    updateProfile,
+    onAuthStateChanged,
+    signOut
+}
+from "https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
+
+
+/* FIREBASE CONFIG */
+
+const firebaseConfig = {
+    apiKey: "AIzaSyDOnoEKadsX2e8E3rQeh4VsrKOvaw_-GU4",
+    authDomain: "premium-video-downloader-e70f1.firebaseapp.com",
+    projectId: "premium-video-downloader-e70f1",
+    storageBucket: "premium-video-downloader-e70f1.firebasestorage.app",
+    messagingSenderId: "941556261610",
+    appId: "1:941556261610:web:ef9307dfa590433fac6d93",
+    measurementId: "G-KKH5T2VZKF"
+};
+
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const googleProvider = new GoogleAuthProvider();
+
+
+let signupMode = false;
 let selectedPlatform = "";
 
-function selectPlatform(element, platform) {
-    document.querySelectorAll(".platform").forEach(item => {
-        item.classList.remove("selected");
-    });
+
+/* ELEMENTS */
+
+const authScreen = document.getElementById("authScreen");
+const appScreen = document.getElementById("appScreen");
+const bottomNav = document.getElementById("bottomNav");
+
+const authTitle = document.getElementById("authTitle");
+const authSub = document.getElementById("authSub");
+
+const nameInput = document.getElementById("nameInput");
+const emailInput = document.getElementById("emailInput");
+const passwordInput = document.getElementById("passwordInput");
+
+const emailButton = document.getElementById("emailButton");
+const googleButton = document.getElementById("googleButton");
+const switchText = document.getElementById("switchText");
+const authStatus = document.getElementById("authStatus");
+
+
+/* STATUS */
+
+function authMessage(message){
+
+    authStatus.style.display = "block";
+    authStatus.innerText = message;
+
+}
+
+
+/* LOGIN / SIGNUP SWITCH */
+
+switchText.onclick = () => {
+
+    signupMode = !signupMode;
+
+    if(signupMode){
+
+        authTitle.innerText = "Create Account";
+        authSub.innerText =
+            "Create your Premium Video Downloader account";
+
+        nameInput.classList.remove("hidden");
+
+        emailButton.innerText = "Create Account";
+
+        switchText.innerText =
+            "Already have an account? Login";
+
+    }else{
+
+        authTitle.innerText = "Welcome Back";
+        authSub.innerText =
+            "Login to Premium Video Downloader";
+
+        nameInput.classList.add("hidden");
+
+        emailButton.innerText = "Login";
+
+        switchText.innerText =
+            "Don't have an account? Sign Up";
+    }
+
+};
+
+
+/* EMAIL LOGIN / SIGNUP */
+
+emailButton.onclick = async () => {
+
+    const email = emailInput.value.trim();
+    const password = passwordInput.value;
+    const name = nameInput.value.trim();
+
+    if(!email || !password){
+
+        authMessage("Please enter email and password.");
+        return;
+    }
+
+    if(password.length < 6){
+
+        authMessage("Password must be at least 6 characters.");
+        return;
+    }
+
+    try{
+
+        if(signupMode){
+
+            if(!name){
+
+                authMessage("Please enter your name.");
+                return;
+            }
+
+            const result =
+                await createUserWithEmailAndPassword(
+                    auth,
+                    email,
+                    password
+                );
+
+            await updateProfile(result.user,{
+                displayName:name
+            });
+
+            authMessage("Account created successfully.");
+
+        }else{
+
+            await signInWithEmailAndPassword(
+                auth,
+                email,
+                password
+            );
+
+        }
+
+    }catch(error){
+
+        authMessage(error.message);
+
+    }
+
+};
+
+
+/* GOOGLE LOGIN */
+
+googleButton.onclick = async () => {
+
+    try{
+
+        await signInWithPopup(
+            auth,
+            googleProvider
+        );
+
+    }catch(error){
+
+        authMessage(error.message);
+
+    }
+
+};
+
+
+/* AUTH STATE */
+
+onAuthStateChanged(auth,(user)=>{
+
+    if(user){
+
+        authScreen.classList.add("hidden");
+        appScreen.classList.remove("hidden");
+        bottomNav.classList.remove("hidden");
+
+        const name =
+            user.displayName ||
+            "Premium User";
+
+        document.getElementById("profileName")
+            .innerText = name;
+
+        document.getElementById("profileEmail")
+            .innerText = user.email || "";
+
+        document.getElementById("avatar")
+            .innerText =
+                name.charAt(0).toUpperCase();
+
+    }else{
+
+        authScreen.classList.remove("hidden");
+        appScreen.classList.add("hidden");
+        bottomNav.classList.add("hidden");
+
+    }
+
+});
+
+
+/* LOGOUT */
+
+window.logout = async function(){
+
+    await signOut(auth);
+
+};
+
+
+/* PLATFORM */
+
+window.selectPlatform = function(element,platform){
+
+    document
+        .querySelectorAll(".platform")
+        .forEach(item =>
+            item.classList.remove("selected")
+        );
 
     element.classList.add("selected");
+
     selectedPlatform = platform;
 
-    showStatus(platform + " selected.");
-}
+    showDownloadStatus(
+        platform + " selected."
+    );
 
-function showStatus(message) {
-    const status = document.getElementById("status");
+};
+
+
+/* DOWNLOAD */
+
+window.startDownload = function(){
+
+    const url =
+        document
+        .getElementById("videoUrl")
+        .value
+        .trim();
+
+    if(!selectedPlatform){
+
+        showDownloadStatus(
+            "Please select a platform first."
+        );
+
+        return;
+    }
+
+    if(!url){
+
+        showDownloadStatus(
+            "Please paste a video URL."
+        );
+
+        return;
+    }
+
+    /*
+       REAL DOWNLOAD BACKEND WILL BE CONNECTED HERE.
+
+       SaveAPI key must NOT be placed in this
+       public GitHub frontend.
+    */
+
+    showDownloadStatus(
+        "Downloader backend is being connected."
+    );
+
+};
+
+
+function showDownloadStatus(message){
+
+    const status =
+        document.getElementById("downloadStatus");
+
     status.style.display = "block";
     status.innerText = message;
+
 }
 
-function startDownload() {
-    const url = document.getElementById("videoUrl").value.trim();
 
-    if (!selectedPlatform) {
-        showStatus("Please select a platform first.");
-        return;
+/* BOTTOM NAV */
+
+window.showPage = function(page,button){
+
+    document
+        .querySelectorAll(".nav")
+        .forEach(item =>
+            item.classList.remove("active")
+        );
+
+    button.classList.add("active");
+
+    if(page === "home"){
+
+        document
+            .getElementById("homePage")
+            .classList.remove("hidden");
+
+        document
+            .getElementById("profilePage")
+            .classList.add("hidden");
+
+    }else{
+
+        document
+            .getElementById("homePage")
+            .classList.add("hidden");
+
+        document
+            .getElementById("profilePage")
+            .classList.remove("hidden");
+
     }
 
-    if (!url) {
-        showStatus("Please paste a video URL.");
-        return;
-    }
+};
 
-    showStatus(
-        "Your " + selectedPlatform +
-        " link is ready. Download service will be connected next."
-    );
-}
 </script>
 
 </body>
