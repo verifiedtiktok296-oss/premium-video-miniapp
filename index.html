@@ -2,739 +2,1648 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#090b11">
 <title>Premium Video Downloader</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
 body{
-    font-family:Arial,sans-serif;
-    background:#f4f6f8;
-    color:#111827;
-    min-height:100vh;
-    padding-bottom:80px;
+  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:#07090e;color:#fff;transition:.25s
+}
+button,input{font:inherit}
+button{cursor:pointer}
+.app{max-width:760px;margin:auto;min-height:100vh;padding-bottom:105px}
+
+/* TOP */
+.top{
+  padding:20px 16px 12px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between
+}
+.brand{display:flex;align-items:center;gap:12px}
+.bot-logo{
+  width:50px;height:50px;border-radius:16px;
+  object-fit:cover;
+  background:linear-gradient(135deg,#7657ff,#aa91ff);
+  border:1px solid rgba(255,255,255,.1);
+  box-shadow:0 10px 30px rgba(118,87,255,.25)
+}
+.brand-title{font-size:19px;font-weight:850}
+.brand-sub{font-size:12px;color:#858b99;margin-top:3px}
+.theme{
+  width:43px;height:43px;border-radius:14px;
+  border:1px solid #252936;background:#12151c;color:#fff
 }
 
-.hidden{display:none!important}
+/* PAGES */
+.page{display:none;padding:8px 16px}
+.page.active{display:block}
 
-.header{
-    background:#111827;
-    color:white;
-    padding:24px 18px;
-    border-radius:0 0 24px 24px;
+/* HERO */
+.hero{
+  margin-top:10px;
+  padding:25px 20px;
+  border-radius:26px;
+  border:1px solid #262a35;
+  background:
+    radial-gradient(circle at 90% 0%,rgba(124,92,255,.28),transparent 42%),
+    linear-gradient(145deg,#151823,#0e1017)
+}
+.hero-badge{
+  display:inline-flex;
+  padding:6px 10px;
+  border-radius:20px;
+  background:rgba(124,92,255,.13);
+  color:#b8a9ff;
+  font-size:11px;
+  font-weight:800
+}
+.hero h1{
+  margin:14px 0 8px;
+  font-size:29px;
+  line-height:1.12;
+  letter-spacing:-.7px
+}
+.hero p{
+  margin:0;color:#969ca9;
+  line-height:1.55;font-size:14px
 }
 
-.logo{
-    font-size:23px;
-    font-weight:800;
+/* DOWNLOAD */
+.download-card{
+  margin-top:14px;
+  padding:17px;
+  border-radius:22px;
+  background:#11141b;
+  border:1px solid #262a35
 }
-
-.subtitle{
-    color:#cbd5e1;
-    font-size:13px;
-    margin-top:6px;
+.label{
+  display:block;
+  margin-bottom:8px;
+  font-size:13px;
+  color:#b9bec9;
+  font-weight:750
 }
-
-.container{
-    max-width:620px;
-    margin:auto;
-    padding:18px 14px;
+.url{
+  width:100%;height:54px;
+  border-radius:15px;
+  border:1px solid #2b2f3a;
+  background:#090b10;
+  color:#fff;
+  padding:0 15px;
+  outline:none;
+  font-size:15px
 }
-
-.card{
-    background:white;
-    border-radius:20px;
-    padding:20px;
-    margin-bottom:16px;
-    box-shadow:0 6px 25px rgba(0,0,0,.06);
+.url:focus{
+  border-color:#8064ff;
+  box-shadow:0 0 0 3px rgba(128,100,255,.12)
 }
-
-.card h2{
-    font-size:18px;
-    margin-bottom:15px;
+.download{
+  width:100%;height:54px;
+  margin-top:11px;
+  border:0;border-radius:15px;
+  background:linear-gradient(135deg,#7657ff,#a184ff);
+  color:#fff;font-weight:850;
+  box-shadow:0 12px 28px rgba(118,87,255,.2)
 }
-
-.platforms{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:11px;
-}
-
-.platform{
-    background:white;
-    border:1px solid #e5e7eb;
-    border-radius:15px;
-    padding:16px 8px;
-    text-align:center;
-    font-weight:700;
-    cursor:pointer;
-}
-
-.platform.selected{
-    border:2px solid #111827;
-    background:#f1f5f9;
-}
-
-.icon{
-    display:block;
-    font-size:25px;
-    margin-bottom:6px;
-}
-
-input{
-    width:100%;
-    padding:14px;
-    border:1px solid #d1d5db;
-    border-radius:12px;
-    font-size:15px;
-    outline:none;
-    margin-bottom:12px;
-}
-
-input:focus{
-    border-color:#111827;
-}
-
-button{
-    cursor:pointer;
-}
-
-.primary{
-    width:100%;
-    padding:15px;
-    border:0;
-    border-radius:12px;
-    background:#111827;
-    color:white;
-    font-size:15px;
-    font-weight:700;
-}
-
-.google{
-    width:100%;
-    padding:14px;
-    border:1px solid #d1d5db;
-    border-radius:12px;
-    background:white;
-    color:#111827;
-    font-size:15px;
-    font-weight:700;
-    margin-top:10px;
-}
-
-.secondary{
-    width:100%;
-    padding:13px;
-    border:1px solid #d1d5db;
-    border-radius:12px;
-    background:white;
-    font-weight:700;
-}
-
+.download:disabled{opacity:.55}
 .status{
-    display:none;
-    margin-top:12px;
-    padding:11px;
-    border-radius:10px;
-    background:#f1f5f9;
-    text-align:center;
-    font-size:13px;
+  display:none;
+  margin-top:11px;
+  padding:12px;
+  border-radius:13px;
+  background:#191c24;
+  color:#bfc3cd;
+  font-size:13px;
+  line-height:1.5
 }
 
-.auth-box{
-    max-width:420px;
-    margin:35px auto;
-    padding:20px;
+/* PLATFORMS */
+.section-title{
+  margin:23px 2px 11px;
+  font-size:17px;font-weight:850
 }
-
-.auth-title{
-    font-size:25px;
-    font-weight:800;
-    margin-bottom:7px;
+.platforms{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px
 }
-
-.auth-sub{
-    color:#6b7280;
-    font-size:14px;
-    margin-bottom:20px;
+.platform{
+  min-height:68px;
+  padding:11px;
+  border-radius:17px;
+  border:1px solid #262a35;
+  background:#11141b;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  gap:11px;
+  text-align:left
 }
+.platform.active{
+  border-color:#7657ff;
+  background:rgba(118,87,255,.12)
+}
+.picon{
+  width:40px;height:40px;
+  flex:none;border-radius:12px;
+  display:grid;place-items:center;
+  background:#1a1e27;
+  font-weight:900;font-size:17px
+}
+.pname{font-size:13px;font-weight:800}
+.psub{font-size:10px;color:#707784;margin-top:3px}
 
+/* AUTH */
+.card{
+  margin-top:15px;
+  padding:20px;
+  border-radius:22px;
+  border:1px solid #262a35;
+  background:#11141b
+}
+.card h2{margin:0 0 6px;font-size:23px}
+.sub{color:#858b98;font-size:13px;margin-bottom:18px}
+.input{
+  width:100%;height:51px;
+  margin-bottom:10px;
+  border-radius:14px;
+  border:1px solid #292d38;
+  background:#090b10;color:#fff;
+  padding:0 14px;outline:none
+}
+.input:focus{border-color:#7657ff}
+.auth{
+  width:100%;height:50px;
+  border:0;border-radius:14px;
+  background:#7657ff;color:#fff;
+  font-weight:850
+}
+.google{
+  width:100%;height:50px;
+  margin-top:10px;
+  border-radius:14px;
+  border:1px solid #d9dce2;
+  background:#fff;color:#15171c;
+  display:flex;align-items:center;
+  justify-content:center;gap:10px;
+  font-weight:750
+}
+.google img{width:19px;height:19px}
 .switch{
-    text-align:center;
-    margin-top:15px;
-    font-size:13px;
-    color:#6b7280;
+  text-align:center;margin-top:15px;
+  color:#858b98;font-size:13px
+}
+.switch button{
+  border:0;background:none;
+  color:#a08aff;font-weight:800
 }
 
-.switch span{
-    color:#111827;
-    font-weight:700;
-    cursor:pointer;
-}
-
-.profile{
-    text-align:center;
-}
-
+/* PROFILE */
 .avatar{
-    width:75px;
-    height:75px;
-    border-radius:50%;
-    background:#111827;
-    color:white;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    margin:0 auto 15px;
-    font-size:28px;
-    font-weight:800;
+  width:76px;height:76px;
+  border-radius:23px;
+  object-fit:cover;
+  background:linear-gradient(135deg,#7657ff,#a184ff);
+  margin-bottom:15px
+}
+.profile-name{font-size:21px;font-weight:850}
+.profile-email{
+  color:#858b98;font-size:13px;
+  margin-top:4px;word-break:break-all
+}
+.info{
+  margin-top:20px
+}
+.row{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  padding:13px 0;
+  border-bottom:1px solid #262a35;
+  font-size:13px
+}
+.row:last-child{border-bottom:0}
+.muted{color:#858b98}
+.logout{
+  width:100%;height:48px;
+  margin-top:15px;
+  border-radius:13px;
+  border:1px solid #3a252a;
+  background:#1b1114;
+  color:#ff7d89;font-weight:800
 }
 
-.email{
-    color:#6b7280;
-    font-size:13px;
-    margin-top:5px;
-    word-break:break-word;
+/* HISTORY */
+.empty{
+  padding:38px 12px;
+  text-align:center;
+  color:#858b98;
+  font-size:13px
 }
-
-.bottom{
-    position:fixed;
-    bottom:0;
-    left:0;
-    right:0;
-    height:68px;
-    background:white;
-    border-top:1px solid #e5e7eb;
-    display:flex;
-    justify-content:space-around;
-    align-items:center;
-    z-index:20;
+.history-item{
+  padding:14px 0;
+  border-bottom:1px solid #262a35
 }
+.history-item:last-child{border:0}
+.history-platform{font-weight:800;font-size:14px}
+.history-url{
+  margin-top:4px;
+  color:#707784;font-size:11px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis
+}
+.history-time{margin-top:5px;color:#626977;font-size:10px}
 
+/* NAV */
 .nav{
-    border:0;
-    background:none;
-    color:#6b7280;
-    font-size:12px;
-    font-weight:700;
-    text-align:center;
+  position:fixed;
+  z-index:100;
+  bottom:0;left:50%;
+  transform:translateX(-50%);
+  width:min(760px,100%);
+  padding:9px 12px calc(9px + env(safe-area-inset-bottom));
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+  background:rgba(9,11,16,.95);
+  backdrop-filter:blur(16px);
+  border-top:1px solid #262a35
+}
+.nav button{
+  height:55px;
+  border:0;border-radius:14px;
+  background:transparent;
+  color:#6f7684;
+  font-size:11px;font-weight:800
+}
+.nav button span{
+  display:block;font-size:20px;margin-bottom:2px
+}
+.nav button.active{
+  background:rgba(118,87,255,.13);
+  color:#fff
 }
 
-.nav.active{
-    color:#111827;
+/* LIGHT */
+.light{
+  background:#f4f5f8;color:#15171c
 }
+.light .download-card,
+.light .platform,
+.light .card{
+  background:#fff;border-color:#e1e4ea
+}
+.light .hero{
+  background:#fff;border-color:#e1e4ea
+}
+.light .url,
+.light .input{
+  background:#f7f8fa;color:#15171c;border-color:#dfe2e8
+}
+.light .theme,
+.light .nav{
+  background:rgba(255,255,255,.95);
+  color:#15171c;border-color:#e1e4ea
+}
+.light .nav button.active{color:#15171c}
 
-.nav-icon{
-    display:block;
-    font-size:22px;
-    margin-bottom:3px;
+@media(max-width:390px){
+  .hero h1{font-size:25px}
+  .platforms{gap:8px}
+  .platform{padding:9px}
 }
 </style>
 </head>
 
 <body>
 
+<div class="app">
+
+<header class="top">
+
+  <div class="brand">
+
+    <!--
+      BOT PROFILE PICTURE
+      Replace the src below with your GitHub image URL.
+    -->
+
+    <img
+      id="botLogo"
+      class="bot-logo"
+      src="https://placehold.co/100x100/7657ff/ffffff?text=⚡"
+      alt="Premium Video Downloader"
+    >
+
+    <div>
+      <div class="brand-title">
+        Premium Video Downloader
+      </div>
+
+      <div class="brand-sub">
+        Fast • Simple • Premium
+      </div>
+    </div>
+
+  </div>
+
+  <button
+    id="themeBtn"
+    class="theme"
+    type="button"
+  >
+    ☾
+  </button>
+
+</header>
+
+
+<!-- HOME -->
+
+<main
+  id="homePage"
+  class="page active"
+>
+
+  <section class="hero">
+
+    <span class="hero-badge">
+      ⚡ PREMIUM DOWNLOADER
+    </span>
+
+    <h1>
+      Download your videos<br>
+      quickly & easily.
+    </h1>
+
+    <p>
+      Paste a video link, select the platform,
+      and get your video with a clean premium experience.
+    </p>
+
+  </section>
+
+
+  <section class="download-card">
+
+    <label
+      class="label"
+      for="videoUrl"
+    >
+      Video URL
+    </label>
+
+    <input
+      id="videoUrl"
+      class="url"
+      type="url"
+      placeholder="Paste video link here..."
+      autocomplete="off"
+    >
+
+    <button
+      id="downloadBtn"
+      class="download"
+      type="button"
+    >
+      ⚡ Download Video
+    </button>
+
+    <div
+      id="status"
+      class="status"
+      aria-live="polite"
+    ></div>
+
+  </section>
+
+
+  <div class="section-title">
+    Select Platform
+  </div>
+
+
+  <section class="platforms">
+
+    <button
+      class="platform active"
+      data-platform="TikTok"
+      type="button"
+    >
+      <div class="picon">♪</div>
+      <div>
+        <div class="pname">TikTok</div>
+        <div class="psub">Videos</div>
+      </div>
+    </button>
+
+
+    <button
+      class="platform"
+      data-platform="Instagram"
+      type="button"
+    >
+      <div class="picon">◎</div>
+      <div>
+        <div class="pname">Instagram</div>
+        <div class="psub">Reels & Videos</div>
+      </div>
+    </button>
+
+
+    <button
+      class="platform"
+      data-platform="YouTube Shorts"
+      type="button"
+    >
+      <div class="picon">▶</div>
+      <div>
+        <div class="pname">YouTube Shorts</div>
+        <div class="psub">Short Videos</div>
+      </div>
+    </button>
+
+
+    <button
+      class="platform"
+      data-platform="Pinterest"
+      type="button"
+    >
+      <div class="picon">P</div>
+      <div>
+        <div class="pname">Pinterest</div>
+        <div class="psub">Videos</div>
+      </div>
+    </button>
+
+
+    <button
+      class="platform"
+      data-platform="Facebook"
+      type="button"
+    >
+      <div class="picon">f</div>
+      <div>
+        <div class="pname">Facebook</div>
+        <div class="psub">Videos</div>
+      </div>
+    </button>
+
+
+    <button
+      class="platform"
+      data-platform="Snapchat"
+      type="button"
+    >
+      <div class="picon">S</div>
+      <div>
+        <div class="pname">Snapchat</div>
+        <div class="psub">Videos</div>
+      </div>
+    </button>
+
+  </section>
+
+</main>
+
+
+<!-- DOWNLOADS -->
+
+<main
+  id="downloadsPage"
+  class="page"
+>
+
+  <section class="card">
+
+    <h2>Download History</h2>
+
+    <div class="sub">
+      Your recent downloads will appear here.
+    </div>
+
+    <div id="historyList"></div>
+
+  </section>
+
+</main>
+
+
 <!-- AUTH -->
-<section id="authScreen" class="auth-box">
 
-    <div class="card">
-        <div class="auth-title" id="authTitle">Welcome Back</div>
-        <div class="auth-sub" id="authSub">
-            Login to Premium Video Downloader
-        </div>
+<main
+  id="authPage"
+  class="page"
+>
 
-        <input id="nameInput"
-               class="hidden"
-               type="text"
-               placeholder="Your name">
+  <section class="card">
 
-        <input id="emailInput"
-               type="email"
-               placeholder="Email address">
+    <h2 id="authTitle">
+      Welcome back
+    </h2>
 
-        <input id="passwordInput"
-               type="password"
-               placeholder="Password">
-
-        <button class="primary" id="emailButton">
-            Login
-        </button>
-
-        <button class="google" id="googleButton">
-            🔵 Continue with Google
-        </button>
-
-        <div class="switch">
-            <span id="switchText">Don't have an account? Sign Up</span>
-        </div>
-
-        <div class="status" id="authStatus"></div>
+    <div
+      id="authSub"
+      class="sub"
+    >
+      Login to your Premium Video Downloader account.
     </div>
 
-</section>
+
+    <input
+      id="nameInput"
+      class="input"
+      type="text"
+      placeholder="Your name"
+      style="display:none"
+    >
 
 
-<!-- APP -->
-<section id="appScreen" class="hidden">
-
-    <div class="header">
-        <div class="logo">⚡ Premium Video Downloader</div>
-        <div class="subtitle">Fast & simple video downloading</div>
-    </div>
-
-    <div class="container">
-
-        <!-- HOME -->
-        <div id="homePage">
-
-            <div class="card">
-                <h2>Choose Platform</h2>
-
-                <div class="platforms">
-
-                    <div class="platform"
-                         onclick="selectPlatform(this,'TikTok')">
-                        <span class="icon">🎵</span>
-                        TikTok
-                    </div>
-
-                    <div class="platform"
-                         onclick="selectPlatform(this,'Instagram')">
-                        <span class="icon">📸</span>
-                        Instagram
-                    </div>
-
-                    <div class="platform"
-                         onclick="selectPlatform(this,'YouTube Shorts')">
-                        <span class="icon">▶️</span>
-                        YouTube Shorts
-                    </div>
-
-                    <div class="platform"
-                         onclick="selectPlatform(this,'Pinterest')">
-                        <span class="icon">📌</span>
-                        Pinterest
-                    </div>
-
-                    <div class="platform"
-                         onclick="selectPlatform(this,'Facebook')">
-                        <span class="icon">🔵</span>
-                        Facebook
-                    </div>
-
-                    <div class="platform"
-                         onclick="selectPlatform(this,'Snapchat')">
-                        <span class="icon">👻</span>
-                        Snapchat
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="card">
-                <h2>Video URL</h2>
-
-                <input
-                    id="videoUrl"
-                    type="url"
-                    placeholder="Paste video link here..."
-                >
-
-                <button class="primary" onclick="startDownload()">
-                    ⬇️ Download Video
-                </button>
-
-                <div class="status" id="downloadStatus"></div>
-            </div>
-
-        </div>
+    <input
+      id="emailInput"
+      class="input"
+      type="email"
+      placeholder="Email address"
+      autocomplete="email"
+    >
 
 
-        <!-- PROFILE -->
-        <div id="profilePage" class="hidden">
-
-            <div class="card profile">
-
-                <div class="avatar" id="avatar">U</div>
-
-                <h2 id="profileName">User</h2>
-
-                <div class="email" id="profileEmail">
-                    user@example.com
-                </div>
-
-                <br>
-
-                <button class="secondary" onclick="logout()">
-                    Logout
-                </button>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
+    <input
+      id="passwordInput"
+      class="input"
+      type="password"
+      placeholder="Password"
+      autocomplete="current-password"
+    >
 
 
-<!-- NAVIGATION -->
-<div id="bottomNav" class="bottom hidden">
-
-    <button class="nav active" onclick="showPage('home',this)">
-        <span class="nav-icon">🏠</span>
-        Home
+    <button
+      id="authBtn"
+      class="auth"
+      type="button"
+    >
+      Login
     </button>
 
-    <button class="nav" onclick="showPage('profile',this)">
-        <span class="nav-icon">👤</span>
-        Profile
+
+    <button
+      id="googleBtn"
+      class="google"
+      type="button"
+    >
+
+      <img
+        src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
+        alt="Google"
+      >
+
+      Continue with Google
+
     </button>
+
+
+    <div class="switch">
+
+      <span id="switchText">
+        Don't have an account?
+      </span>
+
+      <button
+        id="switchAuthBtn"
+        type="button"
+      >
+        Sign Up
+      </button>
+
+    </div>
+
+
+    <div
+      id="authStatus"
+      class="status"
+    ></div>
+
+  </section>
+
+</main>
+
+
+<!-- PROFILE -->
+
+<main
+  id="profilePage"
+  class="page"
+>
+
+  <section class="card">
+
+    <img
+      id="profileAvatar"
+      class="avatar"
+      src="https://placehold.co/100x100/7657ff/ffffff?text=U"
+      alt="Profile"
+    >
+
+
+    <div
+      id="profileName"
+      class="profile-name"
+    >
+      Guest
+    </div>
+
+
+    <div
+      id="profileEmail"
+      class="profile-email"
+    >
+      Not signed in
+    </div>
+
+
+    <div class="info">
+
+      <div class="row">
+        <span class="muted">Account</span>
+        <strong id="accountStatus">
+          Guest
+        </strong>
+      </div>
+
+      <div class="row">
+        <span class="muted">Downloads</span>
+        <strong id="downloadCount">
+          0
+        </strong>
+      </div>
+
+      <div class="row">
+        <span class="muted">Plan</span>
+        <strong>Premium</strong>
+      </div>
+
+    </div>
+
+
+    <button
+      id="profileLoginBtn"
+      class="auth"
+      type="button"
+    >
+      Login / Sign Up
+    </button>
+
+
+    <button
+      id="logoutBtn"
+      class="logout"
+      type="button"
+      style="display:none"
+    >
+      Log Out
+    </button>
+
+  </section>
+
+</main>
 
 </div>
 
 
+<!-- BOTTOM NAV -->
+
+<nav class="nav">
+
+  <button
+    class="active"
+    data-page="homePage"
+    type="button"
+  >
+    <span>⌂</span>
+    Home
+  </button>
+
+
+  <button
+    data-page="downloadsPage"
+    type="button"
+  >
+    <span>↓</span>
+    Downloads
+  </button>
+
+
+  <button
+    data-page="profilePage"
+    type="button"
+  >
+    <span>◯</span>
+    Profile
+  </button>
+
+</nav>
+
+
 <script type="module">
 
-import { initializeApp }
-from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
+/* =====================================
+   FIREBASE
+===================================== */
 
 import {
-    getAuth,
-    GoogleAuthProvider,
-    signInWithPopup,
-    createUserWithEmailAndPassword,
-    signInWithEmailAndPassword,
-    updateProfile,
-    onAuthStateChanged,
-    signOut
-}
-from "https://www.gstatic.com/firebasejs/12.3.0/firebase-auth.js";
+  initializeApp
+} from
+"https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
 
 
-/* FIREBASE CONFIG */
+import {
+  getAuth,
+  GoogleAuthProvider,
+  signInWithPopup,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  updateProfile,
+  signOut,
+  onAuthStateChanged
+} from
+"https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
+
 
 const firebaseConfig = {
-    apiKey: "AIzaSyDOnoEKadsX2e8E3rQeh4VsrKOvaw_-GU4",
-    authDomain: "premium-video-downloader-e70f1.firebaseapp.com",
-    projectId: "premium-video-downloader-e70f1",
-    storageBucket: "premium-video-downloader-e70f1.firebasestorage.app",
-    messagingSenderId: "941556261610",
-    appId: "1:941556261610:web:ef9307dfa590433fac6d93",
-    measurementId: "G-KKH5T2VZKF"
+
+  apiKey:
+  "AIzaSyDOnoEKadsX2e8E3rQeh4VsrKOvaw_-GU4",
+
+  authDomain:
+  "premium-video-downloader-e70f1.firebaseapp.com",
+
+  projectId:
+  "premium-video-downloader-e70f1",
+
+  storageBucket:
+  "premium-video-downloader-e70f1.firebasestorage.app",
+
+  messagingSenderId:
+  "941556261610",
+
+  appId:
+  "1:941556261610:web:ef9307dfa590433fac6d93",
+
+  measurementId:
+  "G-KKH5T2VZKF"
+
 };
 
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const googleProvider = new GoogleAuthProvider();
+const firebaseApp =
+initializeApp(firebaseConfig);
+
+const auth =
+getAuth(firebaseApp);
+
+const googleProvider =
+new GoogleAuthProvider();
 
 
+/* =====================================
+   STATE
+===================================== */
+
+let selectedPlatform = "TikTok";
 let signupMode = false;
-let selectedPlatform = "";
 
 
-/* ELEMENTS */
+/* =====================================
+   ELEMENTS
+===================================== */
 
-const authScreen = document.getElementById("authScreen");
-const appScreen = document.getElementById("appScreen");
-const bottomNav = document.getElementById("bottomNav");
+const pages =
+document.querySelectorAll(".page");
 
-const authTitle = document.getElementById("authTitle");
-const authSub = document.getElementById("authSub");
+const navButtons =
+document.querySelectorAll(".nav button");
 
-const nameInput = document.getElementById("nameInput");
-const emailInput = document.getElementById("emailInput");
-const passwordInput = document.getElementById("passwordInput");
+const videoUrl =
+document.getElementById("videoUrl");
 
-const emailButton = document.getElementById("emailButton");
-const googleButton = document.getElementById("googleButton");
-const switchText = document.getElementById("switchText");
-const authStatus = document.getElementById("authStatus");
+const downloadBtn =
+document.getElementById("downloadBtn");
+
+const status =
+document.getElementById("status");
+
+const authTitle =
+document.getElementById("authTitle");
+
+const authSub =
+document.getElementById("authSub");
+
+const authBtn =
+document.getElementById("authBtn");
+
+const googleBtn =
+document.getElementById("googleBtn");
+
+const nameInput =
+document.getElementById("nameInput");
+
+const emailInput =
+document.getElementById("emailInput");
+
+const passwordInput =
+document.getElementById("passwordInput");
+
+const authStatus =
+document.getElementById("authStatus");
+
+const switchText =
+document.getElementById("switchText");
+
+const switchAuthBtn =
+document.getElementById("switchAuthBtn");
+
+const profileName =
+document.getElementById("profileName");
+
+const profileEmail =
+document.getElementById("profileEmail");
+
+const profileAvatar =
+document.getElementById("profileAvatar");
+
+const accountStatus =
+document.getElementById("accountStatus");
+
+const profileLoginBtn =
+document.getElementById("profileLoginBtn");
+
+const logoutBtn =
+document.getElementById("logoutBtn");
+
+const historyList =
+document.getElementById("historyList");
+
+const downloadCount =
+document.getElementById("downloadCount");
+
+const themeBtn =
+document.getElementById("themeBtn");
 
 
-/* STATUS */
+/* =====================================
+   NAVIGATION
+===================================== */
 
-function authMessage(message){
+function showPage(id){
 
-    authStatus.style.display = "block";
-    authStatus.innerText = message;
+  pages.forEach(page=>{
+    page.classList.remove("active");
+  });
+
+  navButtons.forEach(btn=>{
+    btn.classList.remove("active");
+  });
+
+  const page =
+  document.getElementById(id);
+
+  if(page){
+    page.classList.add("active");
+  }
+
+  const nav =
+  document.querySelector(
+    `.nav button[data-page="${id}"]`
+  );
+
+  if(nav){
+    nav.classList.add("active");
+  }
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
 
 }
 
 
-/* LOGIN / SIGNUP SWITCH */
+navButtons.forEach(btn=>{
 
-switchText.onclick = () => {
-
-    signupMode = !signupMode;
-
-    if(signupMode){
-
-        authTitle.innerText = "Create Account";
-        authSub.innerText =
-            "Create your Premium Video Downloader account";
-
-        nameInput.classList.remove("hidden");
-
-        emailButton.innerText = "Create Account";
-
-        switchText.innerText =
-            "Already have an account? Login";
-
-    }else{
-
-        authTitle.innerText = "Welcome Back";
-        authSub.innerText =
-            "Login to Premium Video Downloader";
-
-        nameInput.classList.add("hidden");
-
-        emailButton.innerText = "Login";
-
-        switchText.innerText =
-            "Don't have an account? Sign Up";
+  btn.addEventListener(
+    "click",
+    ()=>{
+      showPage(btn.dataset.page);
     }
-
-};
-
-
-/* EMAIL LOGIN / SIGNUP */
-
-emailButton.onclick = async () => {
-
-    const email = emailInput.value.trim();
-    const password = passwordInput.value;
-    const name = nameInput.value.trim();
-
-    if(!email || !password){
-
-        authMessage("Please enter email and password.");
-        return;
-    }
-
-    if(password.length < 6){
-
-        authMessage("Password must be at least 6 characters.");
-        return;
-    }
-
-    try{
-
-        if(signupMode){
-
-            if(!name){
-
-                authMessage("Please enter your name.");
-                return;
-            }
-
-            const result =
-                await createUserWithEmailAndPassword(
-                    auth,
-                    email,
-                    password
-                );
-
-            await updateProfile(result.user,{
-                displayName:name
-            });
-
-            authMessage("Account created successfully.");
-
-        }else{
-
-            await signInWithEmailAndPassword(
-                auth,
-                email,
-                password
-            );
-
-        }
-
-    }catch(error){
-
-        authMessage(error.message);
-
-    }
-
-};
-
-
-/* GOOGLE LOGIN */
-
-googleButton.onclick = async () => {
-
-    try{
-
-        await signInWithPopup(
-            auth,
-            googleProvider
-        );
-
-    }catch(error){
-
-        authMessage(error.message);
-
-    }
-
-};
-
-
-/* AUTH STATE */
-
-onAuthStateChanged(auth,(user)=>{
-
-    if(user){
-
-        authScreen.classList.add("hidden");
-        appScreen.classList.remove("hidden");
-        bottomNav.classList.remove("hidden");
-
-        const name =
-            user.displayName ||
-            "Premium User";
-
-        document.getElementById("profileName")
-            .innerText = name;
-
-        document.getElementById("profileEmail")
-            .innerText = user.email || "";
-
-        document.getElementById("avatar")
-            .innerText =
-                name.charAt(0).toUpperCase();
-
-    }else{
-
-        authScreen.classList.remove("hidden");
-        appScreen.classList.add("hidden");
-        bottomNav.classList.add("hidden");
-
-    }
+  );
 
 });
 
 
-/* LOGOUT */
+/* =====================================
+   PLATFORM
+===================================== */
 
-window.logout = async function(){
+document
+.querySelectorAll(".platform")
+.forEach(btn=>{
 
-    await signOut(auth);
+  btn.addEventListener(
+    "click",
+    ()=>{
 
-};
+      document
+      .querySelectorAll(".platform")
+      .forEach(x=>{
+        x.classList.remove("active");
+      });
 
+      btn.classList.add("active");
 
-/* PLATFORM */
+      selectedPlatform =
+      btn.dataset.platform;
 
-window.selectPlatform = function(element,platform){
+      showStatus(
+        `${selectedPlatform} selected. Paste your link.`,
+        false
+      );
 
-    document
-        .querySelectorAll(".platform")
-        .forEach(item =>
-            item.classList.remove("selected")
-        );
-
-    element.classList.add("selected");
-
-    selectedPlatform = platform;
-
-    showDownloadStatus(
-        platform + " selected."
-    );
-
-};
-
-
-/* DOWNLOAD */
-
-window.startDownload = function(){
-
-    const url =
-        document
-        .getElementById("videoUrl")
-        .value
-        .trim();
-
-    if(!selectedPlatform){
-
-        showDownloadStatus(
-            "Please select a platform first."
-        );
-
-        return;
     }
+  );
 
-    if(!url){
-
-        showDownloadStatus(
-            "Please paste a video URL."
-        );
-
-        return;
-    }
-
-    /*
-       REAL DOWNLOAD BACKEND WILL BE CONNECTED HERE.
-
-       SaveAPI key must NOT be placed in this
-       public GitHub frontend.
-    */
-
-    showDownloadStatus(
-        "Downloader backend is being connected."
-    );
-
-};
+});
 
 
-function showDownloadStatus(message){
+/* =====================================
+   STATUS
+===================================== */
 
-    const status =
-        document.getElementById("downloadStatus");
+function showStatus(
+  message,
+  error=false
+){
 
-    status.style.display = "block";
-    status.innerText = message;
+  status.style.display="block";
+
+  status.textContent=message;
+
+  status.style.color =
+  error ? "#ff8994" : "#bfc3cd";
 
 }
 
 
-/* BOTTOM NAV */
+function showAuthStatus(
+  message,
+  error=false
+){
 
-window.showPage = function(page,button){
+  authStatus.style.display="block";
 
-    document
-        .querySelectorAll(".nav")
-        .forEach(item =>
-            item.classList.remove("active")
+  authStatus.textContent=message;
+
+  authStatus.style.color =
+  error ? "#ff8994" : "#bfc3cd";
+
+}
+
+
+/* =====================================
+   DOWNLOAD
+===================================== */
+
+downloadBtn.addEventListener(
+  "click",
+  async ()=>{
+
+    const url =
+    videoUrl.value.trim();
+
+    if(!url){
+
+      showStatus(
+        "Please paste a video URL first.",
+        true
+      );
+
+      videoUrl.focus();
+
+      return;
+    }
+
+
+    try{
+
+      new URL(url);
+
+    }catch{
+
+      showStatus(
+        "Please enter a valid URL.",
+        true
+      );
+
+      return;
+    }
+
+
+    /*
+      REAL BACKEND CONNECTION:
+
+      Later this section will call your
+      secure backend, which will use
+      SaveAPI without exposing the API key.
+
+      Example:
+
+      const response = await fetch(
+        "YOUR_BACKEND_URL/download",
+        {
+          method:"POST",
+          headers:{
+            "Content-Type":"application/json"
+          },
+          body:JSON.stringify({
+            url:url,
+            platform:selectedPlatform
+          })
+        }
+      );
+
+    */
+
+
+    downloadBtn.disabled=true;
+
+    downloadBtn.textContent=
+    "⏳ Preparing...";
+
+
+    showStatus(
+      `${selectedPlatform} link received. Connecting to downloader...`
+    );
+
+
+    /*
+      Temporary frontend state only.
+      We will remove this once the
+      real backend is connected.
+    */
+
+    setTimeout(()=>{
+
+      downloadBtn.disabled=false;
+
+      downloadBtn.textContent=
+      "⚡ Download Video";
+
+      showStatus(
+        "Downloader backend is ready to be connected."
+      );
+
+    },1200);
+
+  }
+);
+
+
+/* =====================================
+   HISTORY
+===================================== */
+
+function getHistory(){
+
+  return JSON.parse(
+    localStorage.getItem(
+      "premium_download_history"
+    ) || "[]"
+  );
+
+}
+
+
+function renderHistory(){
+
+  const history =
+  getHistory();
+
+  downloadCount.textContent =
+  history.length;
+
+
+  if(!history.length){
+
+    historyList.innerHTML=`
+      <div class="empty">
+        No downloads yet.<br>
+        Start by downloading a video.
+      </div>
+    `;
+
+    return;
+  }
+
+
+  historyList.innerHTML =
+  history.map(item=>`
+
+    <div class="history-item">
+
+      <div class="history-platform">
+        ${escapeHtml(item.platform)}
+      </div>
+
+      <div class="history-url">
+        ${escapeHtml(item.url)}
+      </div>
+
+      <div class="history-time">
+        ${escapeHtml(item.time)}
+      </div>
+
+    </div>
+
+  `).join("");
+
+}
+
+
+function saveHistory(
+  url,
+  platform
+){
+
+  const history =
+  getHistory();
+
+  history.unshift({
+
+    url:url,
+
+    platform:platform,
+
+    time:new Date()
+    .toLocaleString()
+
+  });
+
+
+  localStorage.setItem(
+    "premium_download_history",
+    JSON.stringify(
+      history.slice(0,30)
+    )
+  );
+
+
+  renderHistory();
+
+}
+
+
+function escapeHtml(value){
+
+  return String(value)
+  .replaceAll("&","&amp;")
+  .replaceAll("<","&lt;")
+  .replaceAll(">","&gt;")
+  .replaceAll('"',"&quot;")
+  .replaceAll("'","&#039;");
+
+}
+
+
+renderHistory();
+
+
+/* =====================================
+   AUTH MODE
+===================================== */
+
+function updateAuthMode(){
+
+  if(signupMode){
+
+    authTitle.textContent =
+    "Create your account";
+
+    authSub.textContent =
+    "Join Premium Video Downloader.";
+
+    nameInput.style.display =
+    "block";
+
+    authBtn.textContent =
+    "Create Account";
+
+    switchText.textContent =
+    "Already have an account?";
+
+    switchAuthBtn.textContent =
+    "Login";
+
+  }else{
+
+    authTitle.textContent =
+    "Welcome back";
+
+    authSub.textContent =
+    "Login to your Premium Video Downloader account.";
+
+    nameInput.style.display =
+    "none";
+
+    authBtn.textContent =
+    "Login";
+
+    switchText.textContent =
+    "Don't have an account?";
+
+    switchAuthBtn.textContent =
+    "Sign Up";
+
+  }
+
+}
+
+
+switchAuthBtn.addEventListener(
+  "click",
+  ()=>{
+
+    signupMode =
+    !signupMode;
+
+    authStatus.style.display =
+    "none";
+
+    updateAuthMode();
+
+  }
+);
+
+
+updateAuthMode();
+
+
+/* =====================================
+   EMAIL AUTH
+===================================== */
+
+authBtn.addEventListener(
+  "click",
+  async ()=>{
+
+    const email =
+    emailInput.value.trim();
+
+    const password =
+    passwordInput.value;
+
+    const name =
+    nameInput.value.trim();
+
+
+    if(!email || !password){
+
+      showAuthStatus(
+        "Enter email and password.",
+        true
+      );
+
+      return;
+    }
+
+
+    if(signupMode && !name){
+
+      showAuthStatus(
+        "Enter your name.",
+        true
+      );
+
+      return;
+    }
+
+
+    authBtn.disabled=true;
+
+    authBtn.textContent =
+    signupMode
+    ? "Creating..."
+    : "Logging in...";
+
+
+    try{
+
+      if(signupMode){
+
+        const result =
+        await createUserWithEmailAndPassword(
+          auth,
+          email,
+          password
         );
 
-    button.classList.add("active");
 
-    if(page === "home"){
+        await updateProfile(
+          result.user,
+          {
+            displayName:name
+          }
+        );
 
-        document
-            .getElementById("homePage")
-            .classList.remove("hidden");
 
-        document
-            .getElementById("profilePage")
-            .classList.add("hidden");
+        showAuthStatus(
+          "Account created successfully."
+        );
 
-    }else{
+      }else{
 
-        document
-            .getElementById("homePage")
-            .classList.add("hidden");
+        await signInWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
 
-        document
-            .getElementById("profilePage")
-            .classList.remove("hidden");
+
+        showAuthStatus(
+          "Login successful."
+        );
+
+      }
+
+    }catch(error){
+
+      console.error(error);
+
+      let message =
+      "Authentication failed.";
+
+      if(
+        error.code ===
+        "auth/email-already-in-use"
+      ){
+        message =
+        "This email is already registered.";
+      }
+
+      if(
+        error.code ===
+        "auth/invalid-credential"
+      ){
+        message =
+        "Invalid email or password.";
+      }
+
+      if(
+        error.code ===
+        "auth/weak-password"
+      ){
+        message =
+        "Password must be at least 6 characters.";
+      }
+
+      if(
+        error.code ===
+        "auth/invalid-email"
+      ){
+        message =
+        "Enter a valid email.";
+      }
+
+
+      showAuthStatus(
+        message,
+        true
+      );
 
     }
 
-};
+
+    authBtn.disabled=false;
+
+    updateAuthMode();
+
+  }
+);
+
+
+/* =====================================
+   GOOGLE
+===================================== */
+
+googleBtn.addEventListener(
+  "click",
+  async ()=>{
+
+    googleBtn.disabled=true;
+
+    try{
+
+      await signInWithPopup(
+        auth,
+        googleProvider
+      );
+
+
+      showAuthStatus(
+        "Google login successful."
+      );
+
+
+      showPage("profilePage");
+
+    }catch(error){
+
+      console.error(error);
+
+      showAuthStatus(
+        "Google login failed. Try again.",
+        true
+      );
+
+    }
+
+
+    googleBtn.disabled=false;
+
+  }
+);
+
+
+/* =====================================
+   AUTH STATE
+===================================== */
+
+onAuthStateChanged(
+  auth,
+  user=>{
+
+    if(user){
+
+      const name =
+      user.displayName ||
+      user.email?.split("@")[0] ||
+      "User";
+
+
+      profileName.textContent =
+      name;
+
+      profileEmail.textContent =
+      user.email ||
+      "Google account";
+
+      accountStatus.textContent =
+      "Logged in";
+
+
+      if(user.photoURL){
+
+        profileAvatar.src =
+        user.photoURL;
+
+      }else{
+
+        profileAvatar.src =
+        `https://placehold.co/100x100/7657ff/ffffff?text=${
+          encodeURIComponent(
+            name.charAt(0).toUpperCase()
+          )
+        }`;
+
+      }
+
+
+      profileLoginBtn.style.display =
+      "none";
+
+      logoutBtn.style.display =
+      "block";
+
+    }else{
+
+      profileName.textContent =
+      "Guest";
+
+      profileEmail.textContent =
+      "Not signed in";
+
+      accountStatus.textContent =
+      "Guest";
+
+      profileAvatar.src =
+      "https://placehold.co/100x100/7657ff/ffffff?text=U";
+
+      profileLoginBtn.style.display =
+      "block";
+
+      logoutBtn.style.display =
+      "none";
+
+    }
+
+  }
+);
+
+
+/* =====================================
+   LOGOUT
+===================================== */
+
+logoutBtn.addEventListener(
+  "click",
+  async ()=>{
+
+    try{
+
+      await signOut(auth);
+
+      showPage("homePage");
+
+    }catch(error){
+
+      console.error(error);
+
+    }
+
+  }
+);
+
+
+profileLoginBtn.addEventListener(
+  "click",
+  ()=>{
+    showPage("authPage");
+  }
+);
+
+
+/* =====================================
+   THEME
+===================================== */
+
+themeBtn.addEventListener(
+  "click",
+  ()=>{
+
+    document.body.classList.toggle(
+      "light"
+    );
+
+    const light =
+    document.body.classList.contains(
+      "light"
+    );
+
+
+    themeBtn.textContent =
+    light ? "☀" : "☾";
+
+
+    localStorage.setItem(
+      "premium_theme",
+      light ? "light" : "dark"
+    );
+
+  }
+);
+
+
+if(
+  localStorage.getItem(
+    "premium_theme"
+  ) === "light"
+){
+
+  document.body.classList.add("light");
+
+  themeBtn.textContent="☀";
+
+}
+
+
+/* =====================================
+   ENTER TO DOWNLOAD
+===================================== */
+
+videoUrl.addEventListener(
+  "keydown",
+  event=>{
+
+    if(event.key==="Enter"){
+
+      downloadBtn.click();
+
+    }
+
+  }
+);
 
 </script>
 
