@@ -148,13 +148,25 @@ button{cursor:pointer}
   border-color:#7657ff;
   background:rgba(118,87,255,.12)
 }
+
+/* REAL LOGO */
 .picon{
-  width:40px;height:40px;
-  flex:none;border-radius:12px;
-  display:grid;place-items:center;
+  width:40px;
+  height:40px;
+  flex:none;
+  border-radius:12px;
+  display:grid;
+  place-items:center;
   background:#1a1e27;
-  font-weight:900;font-size:17px
+  overflow:hidden
 }
+.picon img{
+  width:28px;
+  height:28px;
+  object-fit:contain;
+  display:block
+}
+
 .pname{font-size:13px;font-weight:800}
 .psub{font-size:10px;color:#707784;margin-top:3px}
 
@@ -216,9 +228,7 @@ button{cursor:pointer}
   color:#858b98;font-size:13px;
   margin-top:4px;word-break:break-all
 }
-.info{
-  margin-top:20px
-}
+.info{margin-top:20px}
 .row{
   display:flex;
   justify-content:space-between;
@@ -327,15 +337,19 @@ button{cursor:pointer}
 
   <div class="brand">
 
-    <!--
-      BOT PROFILE PICTURE
-      Replace the src below with your GitHub image URL.
-    -->
+    <!-- =================================================
+         MINI APP PROFILE / BOT LOGO
+         
+         CHANGE ONLY THIS FILE PATH:
+         assets/premium-logo.png
+         
+         You can replace the image anytime.
+         ================================================= -->
 
     <img
       id="botLogo"
       class="bot-logo"
-      src="https://placehold.co/100x100/7657ff/ffffff?text=⚡"
+      src="assets/premium-logo.png"
       alt="Premium Video Downloader"
     >
 
@@ -364,10 +378,7 @@ button{cursor:pointer}
 
 <!-- HOME -->
 
-<main
-  id="homePage"
-  class="page active"
->
+<main id="homePage" class="page active">
 
   <section class="hero">
 
@@ -390,10 +401,7 @@ button{cursor:pointer}
 
   <section class="download-card">
 
-    <label
-      class="label"
-      for="videoUrl"
-    >
+    <label class="label" for="videoUrl">
       Video URL
     </label>
 
@@ -429,12 +437,19 @@ button{cursor:pointer}
 
   <section class="platforms">
 
+    <!-- TIKTOK -->
     <button
       class="platform active"
       data-platform="TikTok"
       type="button"
     >
-      <div class="picon">♪</div>
+      <div class="picon">
+        <img
+          src="assets/logos/tiktok.svg"
+          alt="TikTok"
+        >
+      </div>
+
       <div>
         <div class="pname">TikTok</div>
         <div class="psub">Videos</div>
@@ -442,12 +457,19 @@ button{cursor:pointer}
     </button>
 
 
+    <!-- INSTAGRAM -->
     <button
       class="platform"
       data-platform="Instagram"
       type="button"
     >
-      <div class="picon">◎</div>
+      <div class="picon">
+        <img
+          src="assets/logos/instagram.svg"
+          alt="Instagram"
+        >
+      </div>
+
       <div>
         <div class="pname">Instagram</div>
         <div class="psub">Reels & Videos</div>
@@ -455,12 +477,19 @@ button{cursor:pointer}
     </button>
 
 
+    <!-- YOUTUBE SHORTS -->
     <button
       class="platform"
       data-platform="YouTube Shorts"
       type="button"
     >
-      <div class="picon">▶</div>
+      <div class="picon">
+        <img
+          src="assets/logos/youtube.svg"
+          alt="YouTube"
+        >
+      </div>
+
       <div>
         <div class="pname">YouTube Shorts</div>
         <div class="psub">Short Videos</div>
@@ -468,12 +497,19 @@ button{cursor:pointer}
     </button>
 
 
+    <!-- PINTEREST -->
     <button
       class="platform"
       data-platform="Pinterest"
       type="button"
     >
-      <div class="picon">P</div>
+      <div class="picon">
+        <img
+          src="assets/logos/pinterest.svg"
+          alt="Pinterest"
+        >
+      </div>
+
       <div>
         <div class="pname">Pinterest</div>
         <div class="psub">Videos</div>
@@ -481,12 +517,19 @@ button{cursor:pointer}
     </button>
 
 
+    <!-- FACEBOOK -->
     <button
       class="platform"
       data-platform="Facebook"
       type="button"
     >
-      <div class="picon">f</div>
+      <div class="picon">
+        <img
+          src="assets/logos/facebook.svg"
+          alt="Facebook"
+        >
+      </div>
+
       <div>
         <div class="pname">Facebook</div>
         <div class="psub">Videos</div>
@@ -494,12 +537,19 @@ button{cursor:pointer}
     </button>
 
 
+    <!-- SNAPCHAT -->
     <button
       class="platform"
       data-platform="Snapchat"
       type="button"
     >
-      <div class="picon">S</div>
+      <div class="picon">
+        <img
+          src="assets/logos/snapchat.svg"
+          alt="Snapchat"
+        >
+      </div>
+
       <div>
         <div class="pname">Snapchat</div>
         <div class="psub">Videos</div>
@@ -513,10 +563,7 @@ button{cursor:pointer}
 
 <!-- DOWNLOADS -->
 
-<main
-  id="downloadsPage"
-  class="page"
->
+<main id="downloadsPage" class="page">
 
   <section class="card">
 
@@ -535,10 +582,7 @@ button{cursor:pointer}
 
 <!-- AUTH -->
 
-<main
-  id="authPage"
-  class="page"
->
+<main id="authPage" class="page">
 
   <section class="card">
 
@@ -546,13 +590,9 @@ button{cursor:pointer}
       Welcome back
     </h2>
 
-    <div
-      id="authSub"
-      class="sub"
-    >
+    <div id="authSub" class="sub">
       Login to your Premium Video Downloader account.
     </div>
-
 
     <input
       id="nameInput"
@@ -562,7 +602,6 @@ button{cursor:pointer}
       style="display:none"
     >
 
-
     <input
       id="emailInput"
       class="input"
@@ -570,7 +609,6 @@ button{cursor:pointer}
       placeholder="Email address"
       autocomplete="email"
     >
-
 
     <input
       id="passwordInput"
@@ -580,7 +618,6 @@ button{cursor:pointer}
       autocomplete="current-password"
     >
 
-
     <button
       id="authBtn"
       class="auth"
@@ -588,7 +625,6 @@ button{cursor:pointer}
     >
       Login
     </button>
-
 
     <button
       id="googleBtn"
@@ -605,7 +641,6 @@ button{cursor:pointer}
 
     </button>
 
-
     <div class="switch">
 
       <span id="switchText">
@@ -621,7 +656,6 @@ button{cursor:pointer}
 
     </div>
 
-
     <div
       id="authStatus"
       class="status"
@@ -634,20 +668,16 @@ button{cursor:pointer}
 
 <!-- PROFILE -->
 
-<main
-  id="profilePage"
-  class="page"
->
+<main id="profilePage" class="page">
 
   <section class="card">
 
     <img
       id="profileAvatar"
       class="avatar"
-      src="https://placehold.co/100x100/7657ff/ffffff?text=U"
+      src="assets/profile-default.png"
       alt="Profile"
     >
-
 
     <div
       id="profileName"
@@ -656,14 +686,12 @@ button{cursor:pointer}
       Guest
     </div>
 
-
     <div
       id="profileEmail"
       class="profile-email"
     >
       Not signed in
     </div>
-
 
     <div class="info">
 
@@ -688,7 +716,6 @@ button{cursor:pointer}
 
     </div>
 
-
     <button
       id="profileLoginBtn"
       class="auth"
@@ -696,7 +723,6 @@ button{cursor:pointer}
     >
       Login / Sign Up
     </button>
-
 
     <button
       id="logoutBtn"
@@ -727,7 +753,6 @@ button{cursor:pointer}
     Home
   </button>
 
-
   <button
     data-page="downloadsPage"
     type="button"
@@ -735,7 +760,6 @@ button{cursor:pointer}
     <span>↓</span>
     Downloads
   </button>
-
 
   <button
     data-page="profilePage"
@@ -758,7 +782,6 @@ import {
   initializeApp
 } from
 "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
-
 
 import {
   getAuth,
@@ -1051,32 +1074,6 @@ downloadBtn.addEventListener(
     }
 
 
-    /*
-      REAL BACKEND CONNECTION:
-
-      Later this section will call your
-      secure backend, which will use
-      SaveAPI without exposing the API key.
-
-      Example:
-
-      const response = await fetch(
-        "YOUR_BACKEND_URL/download",
-        {
-          method:"POST",
-          headers:{
-            "Content-Type":"application/json"
-          },
-          body:JSON.stringify({
-            url:url,
-            platform:selectedPlatform
-          })
-        }
-      );
-
-    */
-
-
     downloadBtn.disabled=true;
 
     downloadBtn.textContent=
@@ -1087,12 +1084,6 @@ downloadBtn.addEventListener(
       `${selectedPlatform} link received. Connecting to downloader...`
     );
 
-
-    /*
-      Temporary frontend state only.
-      We will remove this once the
-      real backend is connected.
-    */
 
     setTimeout(()=>{
 
@@ -1538,7 +1529,7 @@ onAuthStateChanged(
       "Guest";
 
       profileAvatar.src =
-      "https://placehold.co/100x100/7657ff/ffffff?text=U";
+      "assets/profile-default.png";
 
       profileLoginBtn.style.display =
       "block";
